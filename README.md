@@ -8,4 +8,4 @@ Kanareikina Katherine
 
 ## Ссылки
 
-[netlify.com/profile]()
+[netlify.com/profile](https://react-movie-site-final-task.netlify.app/)
