@@ -1,0 +1,89 @@
+a {
+   color: #d2d5d8;
+   text-decoration: none;
+}
+
+.header {
+   padding: 18px 0 26px 0;
+   display: flex;
+   justify-content: space-between;
+   align-items: flex-end;
+}
+
+.header__link {
+   display: inline-flex;
+   align-items: baseline;
+   outline: none;
+   border-radius: 4px;
+}
+
+.header__link:focus-visible {
+   box-shadow: 0 0 0 1px #d2d5d8;
+}
+
+.header__link:hover svg {
+   fill: #f73a4c;
+}
+
+.header__link p {
+   font-size: 30px;
+   font-weight: bold;
+   margin-left: 0.2em;
+}
+
+.header__link p::first-letter {
+   font-size: 40px;
+   color: #f73a4c;
+}
+
+.header__block {
+   display: flex;
+   flex-direction: row;
+}
+
+.header__link-add {
+   align-self: center;
+   margin-right: 30px;
+   /* display: none; */
+}
+
+.header__link-add:hover svg {
+   fill: #fc0;
+}
+
+.filter {
+   outline: none;
+   padding: 8px 40px 8px 16px;
+   border: none;
+   border-radius: 4px;
+   background-color: #383636;
+   color: #d2d5d8;
+   margin: 0 1em;
+}
+
+.filter:focus-visible,
+.filter:hover {
+   box-shadow: 0 0 0 1px #d2d5d8;
+}
+
+.header__button {
+   background-color: #f73a4c;
+   padding: 9px 16px;
+   border-radius: 6px;
+   margin-left: 1em;
+   outline: none;
+}
+
+.header__button:focus-visible {
+   box-shadow: 0 0 0 1px #d2d5d8;
+}
+
+.header__button:hover {
+   background-color: #e90e24;
+   color: #ffffff;
+}
+
+.username {
+   align-self: center;
+   margin: 0 15px 0 40px;
+}
