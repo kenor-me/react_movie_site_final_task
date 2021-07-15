@@ -1,0 +1,87 @@
+.movie-information {
+   position: relative;
+   font-size: 15px;
+   color: #ffffff;
+   font-size: 15px;
+   display: flex;
+}
+
+.movie-information__img{
+   max-width: 320px;
+}
+
+.movie-information__text-block {
+   margin-left: 5em;
+}
+
+.movie-information__text-block p {
+   margin-bottom: 0.4em;
+}
+
+.text-block__title {
+   line-height: 200%;
+   font-size: 24px;
+   font-weight: 700;
+   letter-spacing: 0.1em;
+   text-shadow: 0 0 0.6em #f73a4c;
+}
+
+p.text-block__genre {
+   color: #d2d5d8;
+   margin-bottom: 4em;
+}
+
+.text-block__subtitle {
+   letter-spacing: 0.1em;
+}
+
+p.text-block__reiting {
+   color: #3bb33b;
+}
+
+
+p>span {
+   color: #d2d5d8;
+   text-shadow: 0 0 0.6em #f73a4c;
+   padding-right: 10px;
+   font-size: 14px;
+}
+
+.add-vote-raiting {
+   /* display: none; */
+   margin-top: 1em;
+   padding: 0.5em 1em;
+   background-color: #383636;
+   color: #d2d5d8;
+   border: none;
+   border-radius: 4px;
+}
+
+.add-vote-raiting:focus-visible,
+.add-vote-raiting:hover {
+   box-shadow: 0 0 0 1px #d2d5d8;
+}
+
+.add-vote--option:nth-of-type(even) {
+   background-color: #302f2f;
+}
+
+.movies-information__btn-block {
+   margin-left: 2em;
+   margin-top: 0.5em;
+   /* display: none; */
+}
+
+.movies-information__btn-block svg:first-of-type {
+   margin-bottom: 2em;
+}
+
+.movies-information__btn-block svg:first-of-type:hover {
+   fill: #f73a4c;
+   cursor: pointer;
+}
+
+.movies-information__btn-block svg:last-of-type:hover {
+   fill: #fc0;
+   cursor: pointer;
+}

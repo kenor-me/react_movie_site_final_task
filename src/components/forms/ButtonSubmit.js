@@ -20,7 +20,7 @@ const ButtonSubmit = ({ name }) => {
 }
 
 ButtonSubmit.propTypes = {
-   name: PropTypes.string
+   name: PropTypes.string.isRequired
 };
 
 export default ButtonSubmit;

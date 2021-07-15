@@ -1,0 +1,80 @@
+main {
+   min-height: calc(100vh - 200px);
+}
+
+.movies-block {
+   padding: 30px 0;
+}
+
+.movies {
+   list-style-type: none;
+   display: grid;
+   grid-template-columns: repeat(4, auto);
+   row-gap: 35px;
+   column-gap: 3.5em;
+}
+
+.releas {
+   position: absolute;
+   background-color: #383636;
+   padding: 6px 12px 5px 12px;
+   border-radius: 4px;
+   transform: translate(-10px, 55px);
+   visibility: hidden;
+   z-index: 1;
+}
+
+.raiting {
+   position: absolute;
+   background-color: #3bb33b;
+   padding: 6px 12px 5px 12px;
+   border-radius: 4px;
+   max-width: 50px;
+   color: #ffffff;
+   transform: translate(-10px, 15px);
+   visibility: hidden;
+   z-index: 1;
+}
+
+.movie__card:hover .releas,
+.movie__card:hover .raiting {
+   visibility: visible;
+}
+
+.img__block {
+   position: relative;
+   width: 200px;
+}
+
+.img {
+   border-radius: 4px;
+   /* height: auto;
+   min-height: 225px;
+   min-width: 150px; */
+   margin-bottom: 0.5em;
+   background: radial-gradient(at top, #FEFFFF, #383636);
+}
+
+.title {
+   font-weight: 400;
+   font-size: 14px;
+   color: #d2d5d8;
+}
+
+.movie__card {
+   position: relative;
+   transition: all 0.5s ease;
+   display: flex;
+}
+
+.del-card-btn {
+   position: absolute;
+   top: 10px;
+   right: -15%;
+   cursor: pointer;
+   /* display: none; */
+}
+
+.del-card-btn svg:hover {
+   fill: #f73a4c;
+}
