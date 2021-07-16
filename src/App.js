@@ -11,31 +11,75 @@ import SignIn from './components/SigInPage';
 import Film from './components/card/Film';
 
 function App() {
-  const [cards, setCard] = useState([]);
+  const [isAuthAdmin, setAuthAdmin] = useState(false);
+  const [isAuth, setAuth] = useState(false);
+  const [cards, setCards] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  
+  const totalPages = 10;
 
   useEffect(() => {
-      fetch(`https://api.themoviedb.org/3/discover/movie?api_key=00397e0061d58cd6161f47a5da66eda4&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1`)
-      .then((response) => response.json())
-      .then(json => setCard(json.results))
-  },[]);
+    window.scrollTo(0, 0);
+    fetch(`https://api.themoviedb.org/3/discover/movie?api_key=00397e0061d58cd6161f47a5da66eda4&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=${currentPage}`)
+    .then((response) => response.json())
+    .then(json => setCards(json.results))
+  }, [currentPage]);
+
+  const paginat = (pageNumber) => {setCurrentPage(pageNumber)};
+
+  const prevPage = () => {
+    (currentPage > 1)  ? setCurrentPage(prev => prev - 1) : setCurrentPage(1)
+  }
+
+  const nextPage = () => {
+    (currentPage < totalPages) ? setCurrentPage(prev => prev + 1) : setCurrentPage(totalPages);
+  }
 
   return (
     <Router>
       <Switch>
         <Route exact path="/">
           <div className="wrapper">
-            <Header/>
-            <Main cards={cards}/>
-            <Footer/>
+            <Header
+              isAuth={isAuth}
+              isAuthAdmin={isAuthAdmin}
+              onOutClick={setAuth}
+              changeAuthAdmin={setAuthAdmin}
+            />
+            <Main 
+              cards={cards}
+              isAuthAdmin={isAuthAdmin}
+            />
+            <Footer 
+              paginat={paginat}
+              prevPage={prevPage}
+              nextPage={nextPage}
+              totalPages={totalPages}
+              currentPage={currentPage}
+            />
           </div>
         </Route>
         <Route exact path="/film/:id">
           <div className="wrapper">
-            <Header/>
-            <Film cards={cards}/>
+            <Header
+              isAuth={isAuth}
+              onOutClick={setAuth}
+              changeAuthAdmin={setAuthAdmin}
+            />
+            <Film 
+              cards={cards}
+              isAuth={isAuth}
+              isAuthAdmin={isAuthAdmin}
+            />
           </div>
         </Route>
-        <Route exact path="/signIn" component={SignIn}/>
+        <Route exact path="/signIn">
+          <SignIn 
+            isAuthAdmin={isAuthAdmin}
+            onAuthClick={setAuth}
+            changeAuthAdmin={setAuthAdmin}
+          />
+        </Route>
         <Route exact path="/registration" component={RegistrationPage}/>
         <Route exact path="/addMovie" component={AddMovie}/>
         <Redirect to="/"/>

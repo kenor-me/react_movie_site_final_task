@@ -1,8 +1,15 @@
 import React from 'react';
-import { Link, NavLink } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
+
 import './Header.css';
 
-const Header = () => {
+const Header = ({ isAuth, onOutClick, isAuthAdmin, changeAuthAdmin }) => {
+   const handleClick =() => {
+      onOutClick(false);
+      changeAuthAdmin(false);
+   }
+
    return (
       <header>
          <div className="header">
@@ -13,20 +20,34 @@ const Header = () => {
                <p>Movies</p>
             </Link>
             <div className="header__block">
-               <Link className="header__link-add" to="/addMovie"><svg xmlns="http://www.w3.org/2000/svg" width="34" height="34" viewBox="0 0 24 24" fill="#ffffff">
-                     <path d="M12 2c5.514 0 10 4.486 10 10s-4.486 10-10 10-10-4.486-10-10 4.486-10 10-10zm0-2c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm6 13h-5v5h-2v-5h-5v-2h5v-5h2v5h5v2z"></path>
-                  </svg></Link>
+
+               {isAuthAdmin && 
+               (<Link to="/addMovie" className="header__link-add"><svg xmlns="http://www.w3.org/2000/svg" width="34" height="34" viewBox="0 0 24 24" fill="#ffffff">
+                  <path d="M12 2c5.514 0 10 4.486 10 10s-4.486 10-10 10-10-4.486-10-10 4.486-10 10-10zm0-2c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm6 13h-5v5h-2v-5h-5v-2h5v-5h2v5h5v2z"></path>
+                  </svg>
+               </Link>)}
+               
                <select className="filter" name="movies-filter">
                   <option value="rating" defaultValue>Vote rating</option>
                   <option value="release">Release date</option>
                </select>
-               <div className="username">User name</div>
-               <NavLink className="header__button" to="/signIn">Sign In / Sign Up</NavLink>
+
+               {isAuth && (<div className="username">User name</div>)}
+
+               {isAuth ? (<Link to="/" onClick={handleClick} className="header__button">Log Out</Link>) : (<Link to="/signIn" className="header__button">Sign In / Sign Up</Link>)}
+               
             </div>
 
          </div>
       </header>
    )
+}
+
+Header.propTypes = {
+   isAuth: PropTypes.bool,
+   onOutClick: PropTypes.func,
+   changeAuthAdmin: PropTypes.func,
+   isAuthAdmin: PropTypes.bool
 }
 
 export default Header;

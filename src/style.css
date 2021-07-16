@@ -6,68 +6,6 @@
    width: 100%;
 }
 
-.pagination {
-   padding-bottom: 60px;
-   width: fit-content;
-   margin: 0 auto;
-}
-
-.pagination__list {
-   display: flex;
-   list-style-type: none;
-   background-color: #ffffff;
-   justify-content: center;
-   padding: 8px;
-   border-radius: 50px;
-   cursor: pointer;
-}
-
-.pagination__list li {
-   line-height: 45px;
-   text-align: center;
-   color: #383636;
-   font-size: 22px;
-   font-weight: 500;
-   border-radius: 50%;
-   margin: 0 3px;
-   transition: all 0.3s ease;
-}
-
-li.numb {
-   height: 45px;
-   width: 45px;
-}
-
-li.dots {
-   cursor: default;
-}
-
-li.btn {
-   padding: 0 20px;
-}
-
-li.prev {
-   border-radius: 25px 5px 5px 25px;
-}
-
-li.prev::before {
-   content: '< ';
-}
-
-li.next {
-   border-radius: 5px 25px 25px 5px;
-}
-
-li.next::after {
-   content: ' >';
-}
-
-li.active,
-li.btn:hover,
-li.numb:hover {
-   background-color: #f73a4c;
-   color: #ffffff;
-}
 
 .movies-information {
    position: relative;
