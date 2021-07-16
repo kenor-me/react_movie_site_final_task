@@ -4,11 +4,15 @@ import PropTypes from 'prop-types';
 
 import './Header.css';
 
-const Header = ({ isAuth, onOutClick, isAuthAdmin, changeAuthAdmin }) => {
+const Header = ({ isAuth, onOutClick, isAuthAdmin, changeAuthAdmin, isValueFilter }) => {
    const handleClick =() => {
       onOutClick(false);
       changeAuthAdmin(false);
    }
+
+const handleChange = (e) => {
+   isValueFilter(e.target.value)
+}
 
    return (
       <header>
@@ -27,7 +31,8 @@ const Header = ({ isAuth, onOutClick, isAuthAdmin, changeAuthAdmin }) => {
                   </svg>
                </Link>)}
                
-               <select className="filter" name="movies-filter">
+               <select className="filter" name="filter" onChange={handleChange}>
+                  <option value="popularity" defaultValue>Popularity</option>
                   <option value="rating" defaultValue>Vote rating</option>
                   <option value="release">Release date</option>
                </select>
@@ -47,7 +52,8 @@ Header.propTypes = {
    isAuth: PropTypes.bool,
    onOutClick: PropTypes.func,
    changeAuthAdmin: PropTypes.func,
-   isAuthAdmin: PropTypes.bool
+   isAuthAdmin: PropTypes.bool,
+   isValueFilter: PropTypes.func
 }
 
 export default Header;

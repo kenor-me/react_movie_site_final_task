@@ -53,6 +53,8 @@ main {
    min-width: 150px; */
    margin-bottom: 0.5em;
    background: radial-gradient(at top, #FEFFFF, #383636);
+   min-height: 300px;
+   min-width: 200px;
 }
 
 .title {

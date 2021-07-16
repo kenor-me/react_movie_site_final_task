@@ -5,7 +5,10 @@ import './Card.css'
 import { Link } from 'react-router-dom';
 
 const Card = ({ title, release_date, vote_average, poster_path, id, isAuthAdmin }) => {
-   const path = `https://image.tmdb.org/t/p/w200/${poster_path}`;
+
+   let path = '';
+   
+   (poster_path) && (path = `https://image.tmdb.org/t/p/w200/${poster_path}`)
 
    return (
       <li className="movie__card">
