@@ -11,10 +11,10 @@ import SignIn from './components/SigInPage';
 import Film from './components/card/Film';
 
 function App() {
-  const [isAuthAdmin, setAuthAdmin] = useState(false);
-  const [isAuth, setAuth] = useState(false);
   const [cards, setCards] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
+  const [isAuthAdmin, setAuthAdmin] = useState(true);
+  const [isAuth, setAuth] = useState(true);
   const [filter, setFilter] = useState('popularity.desc');
   
   const totalPages = 10;
@@ -40,6 +40,10 @@ function App() {
     (currentPage < totalPages) ? setCurrentPage(prev => prev + 1) : setCurrentPage(totalPages);
   }
 
+  const deleteFilm = (id) => {
+    setCards(cards.filter(film => film.id !== id))
+  }
+
   return (
     <Router>
       <Switch>
@@ -56,6 +60,7 @@ function App() {
               cards={cards}
               isAuthAdmin={isAuthAdmin}
               isAuth={isAuth}
+              deleteFilm={deleteFilm}
             />
             <Footer 
               paginate={paginate}

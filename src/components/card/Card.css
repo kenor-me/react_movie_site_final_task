@@ -71,6 +71,11 @@ main {
    color: #d2d5d8;
 }
 
+button.del-card-btn {
+   background-color: transparent ;
+   border: none;
+}
+
 .del-card-btn {
    position: absolute;
    top: 10px;
