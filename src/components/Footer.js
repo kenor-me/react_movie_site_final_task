@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 
 import './Footer.css'
 
-const Footer = ({ paginat, prevPage, nextPage, totalPages, currentPage }) => {
+const Footer = ({ paginate, prevPage, nextPage, totalPages, currentPage }) => {
 
    const pageNumbers = [];
    for (let i = 1; i <= totalPages; i++) {
@@ -30,7 +30,7 @@ const Footer = ({ paginat, prevPage, nextPage, totalPages, currentPage }) => {
                      className={"numb" + ((currentPage === page) ? ' active':'')}>
                      <Link 
                         to="/"
-                        onClick={() => paginat(page)}
+                        onClick={() => paginate(page)}
                      >{page}</Link>
                   </li>
                ))
@@ -50,7 +50,7 @@ const Footer = ({ paginat, prevPage, nextPage, totalPages, currentPage }) => {
 }
 
 Footer.propTypes = {
-   paginat: PropTypes.func.isRequired,
+   paginate: PropTypes.func.isRequired,
    nextPage: PropTypes.func.isRequired,
    prevPage: PropTypes.func.isRequired,
    totalPages: PropTypes.number.isRequired,

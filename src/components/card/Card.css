@@ -9,12 +9,13 @@ main {
 .movies {
    list-style-type: none;
    display: grid;
-   grid-template-columns: repeat(4, auto);
+   grid-template-columns: repeat(4, 1fr);
    row-gap: 35px;
    column-gap: 3.5em;
+   justify-content: center;
 }
 
-.releas {
+.release {
    position: absolute;
    background-color: #383636;
    padding: 6px 12px 5px 12px;
@@ -24,7 +25,7 @@ main {
    z-index: 1;
 }
 
-.raiting {
+.rating {
    position: absolute;
    background-color: #3bb33b;
    padding: 6px 12px 5px 12px;
@@ -36,8 +37,15 @@ main {
    z-index: 1;
 }
 
-.movie__card:hover .releas,
-.movie__card:hover .raiting {
+.movie__card {
+   justify-content: center;
+   position: relative;
+   transition: all 0.5s ease;
+   display: flex;
+}
+
+.movie__card:hover .release,
+.movie__card:hover .rating {
    visibility: visible;
 }
 
@@ -61,12 +69,6 @@ main {
    font-weight: 400;
    font-size: 14px;
    color: #d2d5d8;
-}
-
-.movie__card {
-   position: relative;
-   transition: all 0.5s ease;
-   display: flex;
 }
 
 .del-card-btn {

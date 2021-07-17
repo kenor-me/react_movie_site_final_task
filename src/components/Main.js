@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import Card from './card/Card';
 
-const Main = ({ cards, isAuthAdmin }) => {
+const Main = ({ cards, isAuthAdmin, isAuth }) => {
    return (
       <main>
          <section className="movies-block">
@@ -18,6 +18,7 @@ const Main = ({ cards, isAuthAdmin }) => {
                      vote_average={item.vote_average}
                      poster_path={item.poster_path}
                      isAuthAdmin={isAuthAdmin}
+                     isAuth={isAuth}
                   />
                ))}
             </ul>
@@ -28,7 +29,8 @@ const Main = ({ cards, isAuthAdmin }) => {
 
 Main.propTypes = {
    cards: PropTypes.array.isRequired,
-   isAuthAdmin: PropTypes.bool
+   isAuthAdmin: PropTypes.bool,
+   isAuth: PropTypes.bool
 }
 
 export default Main;

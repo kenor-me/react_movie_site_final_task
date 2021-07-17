@@ -15,22 +15,22 @@ function App() {
   const [isAuth, setAuth] = useState(false);
   const [cards, setCards] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
-  const [filter, setFilter] = useState('popularity');
+  const [filter, setFilter] = useState('popularity.desc');
   
   const totalPages = 10;
 
-  let filterValue = '';
-  (filter === 'popularity') ? filterValue = 'popularity.desc' : 
-  (filter === 'rating') ? filterValue = 'vote_count.desc' : filterValue = 'primary_release_date.desc';
+  const isValueFilter = (value) => {
+    setFilter(value);
+  }
 
   useEffect(() => {
     window.scrollTo(0, 0);
-    fetch(`https://api.themoviedb.org/3/discover/movie?api_key=00397e0061d58cd6161f47a5da66eda4&language=en-US&sort_by=${filterValue}&include_adult=false&include_video=false&page=${currentPage}`)
+    fetch(`https://api.themoviedb.org/3/discover/movie?api_key=00397e0061d58cd6161f47a5da66eda4&language=en-US&sort_by=${filter}&include_adult=false&include_video=false&page=${currentPage}`)
     .then((response) => response.json())
     .then(json => setCards(json.results))
-  }, [currentPage, filterValue]);
+  }, [currentPage, filter]);
 
-  const paginat = (pageNumber) => {setCurrentPage(pageNumber)};
+  const paginate = (pageNumber) => {setCurrentPage(pageNumber)};
 
   const prevPage = () => {
     (currentPage > 1)  ? setCurrentPage(prev => prev - 1) : setCurrentPage(1)
@@ -38,10 +38,6 @@ function App() {
 
   const nextPage = () => {
     (currentPage < totalPages) ? setCurrentPage(prev => prev + 1) : setCurrentPage(totalPages);
-  }
-
-  const isValueFilter = (value) => {
-    setFilter(value);
   }
 
   return (
@@ -59,9 +55,10 @@ function App() {
             <Main 
               cards={cards}
               isAuthAdmin={isAuthAdmin}
+              isAuth={isAuth}
             />
             <Footer 
-              paginat={paginat}
+              paginate={paginate}
               prevPage={prevPage}
               nextPage={nextPage}
               totalPages={totalPages}
