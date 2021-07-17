@@ -9,6 +9,8 @@ const Film = ({ cards, isAuth, isAuthAdmin }) => {
    const film = cards.find((item) => item.id === Number(id))
    const keyGenres = film.genre_ids;
    const [genres, setGenres] = useState([]);
+   const param = film.vote_count;
+   const [count, setCount] = useState(param);
 
    useEffect(() => {
       fetch('https://api.themoviedb.org/3/genre/movie/list?api_key=00397e0061d58cd6161f47a5da66eda4&language=en-US')
@@ -27,6 +29,10 @@ const Film = ({ cards, isAuth, isAuthAdmin }) => {
       });
    });
 
+   const handleChangeValue = (e) => {
+      setCount(param + Number(e.target.value));
+   }
+
    return (
       <main>
          <section className="movie-information">
@@ -44,12 +50,12 @@ const Film = ({ cards, isAuth, isAuthAdmin }) => {
                <p className="text-block__genre">{genreFilm}</p>
                <p className="text-block__subtitle">About the film</p>
                <p className="text-block__rating"><span>movie rating:</span>{film.vote_average}</p>
-               <p className="text-block__vote"><span>vote count:</span>{film.vote_count}</p>
+               <p className="text-block__vote"><span>vote count:</span>{count}</p>
                <p><span>release date:</span>{film.release_date}</p>
                <p><span>overview:</span>{film.overview}</p>
                {(isAuth && !isAuthAdmin) && (
-                  <select className="add-vote-rating" name="vote(rating)">
-                  <option className="add-vote--option" defaultValue>vote(rating)</option>
+                  <select className="add-vote-rating" name="vote(rating)" onChange={handleChangeValue}>
+                  <option className="add-vote--option" value="0" defaultValue>vote(rating)</option>
                   <option className="add-vote--option" value="1">1</option>
                   <option className="add-vote--option" value="2">2</option>
                   <option className="add-vote--option" value="3">3</option>

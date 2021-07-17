@@ -36,7 +36,7 @@ const Card = ({ title, release_date, vote_average, poster_path, id, isAuthAdmin,
 Card.propTypes = {
    id: PropTypes.number.isRequired,
    title: PropTypes.string.isRequired,
-   release_date: PropTypes.string.isRequired,
+   release_date: PropTypes.string,
    vote_average: PropTypes.number.isRequired,
    poster_path: PropTypes.string,
    isAuthAdmin: PropTypes.bool,
