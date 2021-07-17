@@ -18,6 +18,10 @@ const Film = ({ cards, isAuth, isAuthAdmin }) => {
       .then(json => setGenres(json.genres))
    }, []);
 
+   const handleChangeValue = (e) => {
+      setCount(param + Number(e.target.value));
+   }
+
    let genreFilm = '';
    let n = 0;
    genres.forEach( key => {
@@ -28,10 +32,6 @@ const Film = ({ cards, isAuth, isAuthAdmin }) => {
          }
       });
    });
-
-   const handleChangeValue = (e) => {
-      setCount(param + Number(e.target.value));
-   }
 
    return (
       <main>

@@ -9,6 +9,7 @@ import Main from './components/Main';
 import RegistrationPage from './components/RegistrationPage';
 import SignIn from './components/SigInPage';
 import Film from './components/card/Film';
+import NotFoundPage from './components/notFoundPage/NotFoundPage';
 
 function App() {
   const [cards, setCards] = useState([]);
@@ -93,7 +94,13 @@ function App() {
           />
         </Route>
         <Route exact path="/registration" component={RegistrationPage}/>
-        <Route exact path="/addMovie" component={AddMovie}/>
+        <Route exact path="/addMovie">
+          <AddMovie
+            onOutClick={setAuth}
+            changeAuthAdmin={setAuthAdmin}
+          />
+        </Route>
+        <Route exact path="/notFoundPage" component={NotFoundPage}/>
         <Redirect to="/"/>
       </Switch>
     </Router>

@@ -1,14 +1,23 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
 import './FormPages.css';
 import ButtonSubmit from './forms/ButtonSubmit';
 import HomeLink from './HomeLink';
 
-const AddMovie = () => {
+const AddMovie = ({ onOutClick, changeAuthAdmin }) => {
+
+   const handleClick = () => {
+      onOutClick(false);
+      changeAuthAdmin(false);
+   }
+
    return (
       <main className="form-wrapper">
          <section className="form-card">
             <HomeLink/>
+            <Link to="/notFoundPage" onClick={handleClick} className="header__button log-out__link">Log Out</Link>
             <h1 className="form-card__title">About the film</h1>
             <form className="form-card__information" action="" method="POST">
          
@@ -137,5 +146,11 @@ const AddMovie = () => {
       </main>
    )
 }
+
+AddMovie.propTypes = {
+   onOutClick: PropTypes.func,
+   changeAuthAdmin: PropTypes.func,
+}
+
 
 export default AddMovie;

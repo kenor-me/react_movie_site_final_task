@@ -1,0 +1,32 @@
+.block {
+   padding-top: 50px;
+   position: relative;
+}
+
+.text {
+   font-size: 24px;
+}
+
+.title {
+   padding-top: 30px;
+   font-size: 50px;
+   line-height: 120%;
+   color: rgb(202, 205, 207);
+}
+
+.subtitle {
+   padding-bottom: 15px;
+}
+
+a.link {
+left: 100px;
+}
+
+.numb {
+   position: absolute;
+   font-size: 150px;
+   color: rgba(237,28,36,0.2);
+   top: 140px;
+   left: 300px;
+   z-index: -1;
+}
