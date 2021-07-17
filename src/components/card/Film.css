@@ -69,19 +69,24 @@ p>span {
 .movies-information__btn-block {
    margin-left: 2em;
    margin-top: 0.5em;
-   /* display: none; */
+   display: flex;
+   flex-direction: column;
 }
 
 .movies-information__btn-block svg:first-of-type {
    margin-bottom: 2em;
 }
 
-.movies-information__btn-block svg:first-of-type:hover {
-   fill: #f73a4c;
+.movies-information__btn-block button {
+   background-color: transparent;
+   border: none;
    cursor: pointer;
 }
 
-.movies-information__btn-block svg:last-of-type:hover {
+button.del-btn svg:hover {
+   fill: #f73a4c;
+}
+
+button.edit-btn svg:hover {
    fill: #fc0;
-   cursor: pointer;
 }

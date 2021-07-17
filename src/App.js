@@ -83,6 +83,7 @@ function App() {
               cards={cards}
               isAuth={isAuth}
               isAuthAdmin={isAuthAdmin}
+              deleteFilm={deleteFilm}
             />
           </div>
         </Route>
