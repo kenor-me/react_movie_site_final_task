@@ -16,8 +16,8 @@ function App() {
   const [cards, setCards] = useState([]);
   const [users, setUsers] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
-  const [isAuthAdmin, setAuthAdmin] = useState(true);
-  const [isAuth, setAuth] = useState(true);
+  const [isAuthAdmin, setAuthAdmin] = useState(false);
+  const [isAuth, setAuth] = useState(false);
   const [filter, setFilter] = useState('popularity.desc');
 
   const totalPages = 10;
@@ -53,15 +53,29 @@ function App() {
   }
 
   const addFilm = (data) => {
-    console.log(typeof data, data);
-    // setCards(cards => cards.unshift(data));
-    // console.log(typeof cards);
+    setCards([
+      {
+        title: data.title,
+        overview: data.overview,
+        poster_path: data.poster_path,
+        popularity: Number(data.popularity),
+        release_date: data.release_date,
+        id: Number(data.id),
+        vote_average: Number(data.vote_average),
+        vote_count: Number(data.vote_count),
+        genre_ids: data.genre_ids
+      }, ...cards
+    ])
   }
 
   const paramsFunc = (val) => {
-    setUsers(users.push(val));
-    console.log(users);
-    console.log(val);
+    setUsers([
+      ...users, {
+        user: val.user,
+        email: val.email,
+        password: val.password
+      }
+    ])
   }
 
   return (
@@ -118,6 +132,7 @@ function App() {
           <RegistrationPage 
             paramsFunc={paramsFunc}
             users={users}
+            onAuthClick={setAuth}
           />
         </Route>
         <Route exact path="/addMovie">

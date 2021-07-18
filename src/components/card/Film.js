@@ -32,7 +32,7 @@ const Film = ({ cards, isAuth, isAuthAdmin, deleteFilm }) => {
    let n = 0;
    genres.forEach( key => {
       keyGenres.forEach( i => {
-         if (key.id === i) {
+         if (key.id === Number(i)) {
             n++;
             (keyGenres.length === n) ? (genreFilm += `${key.name} `) : (genreFilm += `${key.name}, `);
          }

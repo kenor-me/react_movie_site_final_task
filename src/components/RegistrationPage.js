@@ -6,16 +6,20 @@ import { useHistory } from 'react-router-dom';
 import './FormPages.css';
 import HomeLink from './HomeLink';
 
-const RegistrationPage = ({ paramsFunc, users }) => {
+const RegistrationPage = ({ paramsFunc, users, onAuthClick }) => {
    const { register, handleSubmit, formState: { errors }, watch } = useForm({ mode:"onChange" });
    const history = useHistory();
    // console.log(typeof users, users);
 
    const onSubmit = (data) => {
       paramsFunc(data);
+      onAuthClick(true);
       history.push("/");
    };
    watch('user', 'surname', 'email', 'password', 'confirm_password');
+
+   // const test = users[0].email;
+   // console.log(test);
 
    return (
       <main className="form-wrapper">
@@ -45,9 +49,17 @@ const RegistrationPage = ({ paramsFunc, users }) => {
 
                   <div className="input-block">
                      <label htmlFor="user_email">Email</label>
-                     {/* !не работает валидация имейла */}
+                     {/*как правильно прописать валидацию для имейла?*/}
                      <input 
-                        {...register("email", { required: true, validate: (value) => users.map(item => item.email !== value)})}
+                        {...register("email", { required: true, validate: (value) => 
+                           users.map(item => {
+                              if(value === item.email) {
+                                 alert('this user is already registered log in or enter another email');
+                              }
+                           })
+                           // value !== item.email;
+                           // value !== test
+                        })}
                         type="email" 
                         id="user_email" 
                      />
@@ -90,7 +102,8 @@ const RegistrationPage = ({ paramsFunc, users }) => {
 
 RegistrationPage.propTypes = {
    paramsFunc: PropTypes.func,
-   users: PropTypes.array
+   users: PropTypes.array,
+   onAuthClick: PropTypes.func
 }
 
 export default RegistrationPage;
