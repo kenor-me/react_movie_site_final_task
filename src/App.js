@@ -17,7 +17,7 @@ function App() {
   const [isAuthAdmin, setAuthAdmin] = useState(true);
   const [isAuth, setAuth] = useState(true);
   const [filter, setFilter] = useState('popularity.desc');
-  
+
   const totalPages = 10;
 
   const isValueFilter = (value) => {
@@ -30,6 +30,14 @@ function App() {
     .then((response) => response.json())
     .then(json => setCards(json.results))
   }, [currentPage, filter]);
+
+  // useEffect(() => {
+  //   fetch('dummy_data/users.json')
+  //   // .then((response) => response.json())
+  //   .then((response) => response.text())
+  //   // .then(json => setCards(json.results))
+  //   .then(json => console.log(json))
+  // }, []);
 
   const paginate = (pageNumber) => {setCurrentPage(pageNumber)};
 

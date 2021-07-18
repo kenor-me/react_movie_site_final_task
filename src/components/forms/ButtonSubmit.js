@@ -11,9 +11,9 @@ const ButtonSubmit = ({ name }) => {
 
    return (
       <button 
+         disabled
          className="button-block__btn" 
          type="submit" 
-         // disabled
          onClick={handleOnClick}
       >{name}</button>
    )
