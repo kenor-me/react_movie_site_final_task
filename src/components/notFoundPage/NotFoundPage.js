@@ -11,8 +11,8 @@ const NotFoundPage = () => {
             <h1 className={s.title}>Page not found</h1>
             <p className={s.subtitle}>Go back home, please</p>
             <HomeLink className={s.link}/>
+            <p className={s.numb}>404</p>
          </section>
-         <p className={s.numb}>404</p>
       </main>
    )
 }
