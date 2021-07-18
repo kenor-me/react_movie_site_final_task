@@ -10,16 +10,17 @@ import RegistrationPage from './components/RegistrationPage';
 import SignIn from './components/SigInPage';
 import Film from './components/card/Film';
 import NotFoundPage from './components/notFoundPage/NotFoundPage';
+import list from './dummy_data/users.json';
 
 function App() {
   const [cards, setCards] = useState([]);
+  const [users, setUsers] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [isAuthAdmin, setAuthAdmin] = useState(true);
   const [isAuth, setAuth] = useState(true);
   const [filter, setFilter] = useState('popularity.desc');
 
   const totalPages = 10;
-
   const isValueFilter = (value) => {
     setFilter(value);
   }
@@ -31,13 +32,11 @@ function App() {
     .then(json => setCards(json.results))
   }, [currentPage, filter]);
 
-  // useEffect(() => {
-  //   fetch('dummy_data/users.json')
-  //   // .then((response) => response.json())
-  //   .then((response) => response.text())
-  //   // .then(json => setCards(json.results))
-  //   .then(json => console.log(json))
-  // }, []);
+  useEffect(() => {
+    setUsers(list);
+    console.log(list);
+  }, []);
+
 
   const paginate = (pageNumber) => {setCurrentPage(pageNumber)};
 
@@ -51,6 +50,18 @@ function App() {
 
   const deleteFilm = (id) => {
     setCards(cards.filter(film => film.id !== id))
+  }
+
+  const addFilm = (data) => {
+    console.log(typeof data, data);
+    // setCards(cards => cards.unshift(data));
+    // console.log(typeof cards);
+  }
+
+  const paramsFunc = (val) => {
+    setUsers(users.push(val));
+    console.log(users);
+    console.log(val);
   }
 
   return (
@@ -100,13 +111,20 @@ function App() {
             isAuthAdmin={isAuthAdmin}
             onAuthClick={setAuth}
             changeAuthAdmin={setAuthAdmin}
+            users={users}
           />
         </Route>
-        <Route exact path="/registration" component={RegistrationPage}/>
+        <Route exact path="/registration">
+          <RegistrationPage 
+            paramsFunc={paramsFunc}
+            users={users}
+          />
+        </Route>
         <Route exact path="/addMovie">
           <AddMovie
             onOutClick={setAuth}
             changeAuthAdmin={setAuthAdmin}
+            addFilm={addFilm}
           />
         </Route>
         <Route exact path="/notFoundPage" component={NotFoundPage}/>

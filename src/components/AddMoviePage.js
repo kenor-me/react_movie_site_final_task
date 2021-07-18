@@ -1,15 +1,18 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { useForm } from "react-hook-form";
 
 import './FormPages.css';
-import ButtonSubmit from './forms/ButtonSubmit';
 import HomeLink from './HomeLink';
 
-const AddMovie = ({ onOutClick, changeAuthAdmin }) => {
+const AddMovie = ({ onOutClick, changeAuthAdmin, addFilm }) => {
    const { register, handleSubmit, formState: { errors }, watch } = useForm({ mode:"onChange" });
-   const onSubmit = (data) => console.log(data);
+   const history = useHistory();
+   const onSubmit = (data) => {
+      addFilm(data);
+      history.push("/");
+   };
 
    watch('title', 'overview', 'poster_path', 'popularity', 'release_date', 
    'genre_ids', 'vote_average', 'vote_count', 'isAdmin', 'id');
@@ -23,9 +26,10 @@ const AddMovie = ({ onOutClick, changeAuthAdmin }) => {
       <main className="form-wrapper">
          <section className="form-card">
             <HomeLink/>
-            <Link to="/notFoundPage" onClick={handleClick} className="header__button log-out__link">Log Out</Link>
+            <Link to="/notFoundPage" 
+            onClick={handleClick} className="header__button log-out__link">Log Out</Link>
             <h1 className="form-card__title">About the film</h1>
-            <form className="form-card__information" onSubmit={handleSubmit(onSubmit)}>
+            <form className="form-card__information" action="" method="POST">
          
                <div className="input-block">
                   <label htmlFor="add_title">title</label>
@@ -144,7 +148,11 @@ const AddMovie = ({ onOutClick, changeAuthAdmin }) => {
                </div>
 
                <div className="button-block">
-                  <ButtonSubmit name="Add"/>
+                  <button 
+                     className="button-block__btn" 
+                     type="submit" 
+                     onClick={handleSubmit(onSubmit)}
+                  >Add</button>
                   <button className="button-block__btn clear" type="reset">Clear</button>
                </div>
             </form>
@@ -156,6 +164,7 @@ const AddMovie = ({ onOutClick, changeAuthAdmin }) => {
 AddMovie.propTypes = {
    onOutClick: PropTypes.func,
    changeAuthAdmin: PropTypes.func,
+   addFilm: PropTypes.func.isRequired
 }
 
 
