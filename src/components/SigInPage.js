@@ -1,23 +1,44 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 import './FormPages.css';
-// import ButtonSubmit from './forms/ButtonSubmit';
 import HomeLink from './HomeLink';
 
 
-const SignIn = ({ isAuthAdmin, onAuthClick, changeAuthAdmin }) => {
+const SignIn = ({ onAuthClick, changeAuthAdmin, users }) => {
+   const [values, setValue] = useState({
+      email: '',
+      password: ''
+   });
+   const [disabled, setDisabled] = useState(true);
 
+   //  как перебирать массив динамически? 
+   const admin = users[1];
+   const userAuth = users[0];
    const history = useHistory();
    const handleClick = (e) => {
       e.preventDefault();
-      history.push("/");
-
       onAuthClick(true);
-      console.log(changeAuthAdmin);
-      console.log(isAuthAdmin);
+      (values.email === admin.email) && (values.password === admin.password) && changeAuthAdmin(true);
+      history.push("/");
    }
+
+   const handleChange = (e) => {
+      setValue({
+         ...values,
+         [e.target.name]: e.target.value,
+      });
+   }
+
+   useEffect(() => {
+      // console.log(values);
+      // при перезагрузке страницы нужно очистить useEffect, разобраться как!!!
+      (values.email === admin.email) && (values.password === admin.password) && setDisabled(false);
+      (values.email === userAuth.email) && (values.password === userAuth.password) && setDisabled(false);
+      // return () => {
+      // }
+   }, [admin, values, userAuth])
 
    return (
       <main className="form-wrapper">
@@ -29,27 +50,30 @@ const SignIn = ({ isAuthAdmin, onAuthClick, changeAuthAdmin }) => {
                      <label htmlFor="user_email">Email</label>
                      <input 
                         type="email" 
-                        name="email" 
                         id="user_email" 
                         required
+                        name="email" 
+                        value={values.email}
+                        onChange={handleChange}
                      />
-                     <span className="warning-text user-wrong-email"></span>
                   </div>
                   <div className="input-block">
                      <label htmlFor="user_password">Password</label>
                      <input 
                         type="password" 
-                        name="password" 
                         id="user_password" 
                         required
+                        name="password" 
+                        value={values.password}
+                        onChange={handleChange}
                      />
-                     <span className="warning-text user-wrong-pass"></span>
+                     
                   </div>
                   <div className="button-block">
                      <button 
                         className="button-block__btn" 
                         type="submit" 
-                        // disabled
+                        disabled={disabled}
                         onClick={handleClick}
                      >Sign</button>
                      <Link className="button-block__btn" to="/registration">Registration</Link>
@@ -61,9 +85,9 @@ const SignIn = ({ isAuthAdmin, onAuthClick, changeAuthAdmin }) => {
 }
 
 SignIn.propTypes = {
-   isAuthAdmin: PropTypes.bool,
    onAuthClick: PropTypes.func,
-   changeAuthAdmin: PropTypes.func
+   changeAuthAdmin: PropTypes.func,
+   users: PropTypes.array
 }
 
 export default SignIn;

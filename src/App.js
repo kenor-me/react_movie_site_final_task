@@ -34,7 +34,7 @@ function App() {
 
   useEffect(() => {
     setUsers(list);
-    console.log(list);
+    // console.log(list);
   }, []);
 
 
@@ -122,7 +122,6 @@ function App() {
         </Route>
         <Route exact path="/signIn">
           <SignIn 
-            isAuthAdmin={isAuthAdmin}
             onAuthClick={setAuth}
             changeAuthAdmin={setAuthAdmin}
             users={users}

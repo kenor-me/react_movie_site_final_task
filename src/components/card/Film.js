@@ -6,11 +6,11 @@ import './Film.css'
 
 const Film = ({ cards, isAuth, isAuthAdmin, deleteFilm }) => {
    const {id} = useParams();
-   const film = cards.find((item) => item.id === Number(id))
-   const keyGenres = film.genre_ids;
    const [genres, setGenres] = useState([]);
+   const film = cards.find((item) => item.id === Number(id))
    const param = film.vote_count;
    const [count, setCount] = useState(param);
+   const keyGenres = film.genre_ids;
 
    useEffect(() => {
       fetch('https://api.themoviedb.org/3/genre/movie/list?api_key=00397e0061d58cd6161f47a5da66eda4&language=en-US')
