@@ -5,11 +5,14 @@ import './Card.css'
 import { Link } from 'react-router-dom';
 import DeleteButton from './DeleteButton';
 
-const Card = ({ title, release_date, vote_average, poster_path, id, isAuthAdmin, isAuth, deleteFilm }) => {
+const Card = ({ title, release_date, vote_average, poster_path, id, isAuthAdmin, isAuth, deleteFilm, onHidden }) => {
 
    let path = '';
    
-   (poster_path) && (path = `https://image.tmdb.org/t/p/w200/${poster_path}`)
+   (poster_path) && (path = `https://image.tmdb.org/t/p/w200/${poster_path}`);
+   const handleChange = () => {
+      onHidden(true);
+   }
 
    return (
       <li className="movie__card">
@@ -17,7 +20,7 @@ const Card = ({ title, release_date, vote_average, poster_path, id, isAuthAdmin,
             <div className="release">{release_date}</div>
             <div className="rating">{vote_average}</div>
             <div className="img__block">
-               <Link to={`/film/${id}`}>
+               <Link to={`/film/${id}`} onClick={handleChange}>
                   <img className="img" src={path}  alt="movie"/>
                </Link>
                {isAuthAdmin && isAuth && (
@@ -41,7 +44,8 @@ Card.propTypes = {
    poster_path: PropTypes.string,
    isAuthAdmin: PropTypes.bool,
    isAuth: PropTypes.bool,
-   deleteFilm: PropTypes.func.isRequired
+   deleteFilm: PropTypes.func.isRequired,
+   onHidden: PropTypes.func
 };
 
 export default Card;

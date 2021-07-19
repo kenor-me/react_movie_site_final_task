@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import Card from './card/Card';
 
-const Main = ({ cards, isAuthAdmin, isAuth, deleteFilm }) => {
+const Main = ({ cards, isAuthAdmin, isAuth, deleteFilm, onHidden }) => {
    return (
       <main>
          <section className="movies-block">
@@ -20,6 +20,7 @@ const Main = ({ cards, isAuthAdmin, isAuth, deleteFilm }) => {
                      isAuthAdmin={isAuthAdmin}
                      isAuth={isAuth}
                      deleteFilm={deleteFilm}
+                     onHidden={onHidden}
                   />
                ))}
             </ul>
@@ -32,7 +33,8 @@ Main.propTypes = {
    cards: PropTypes.array.isRequired,
    isAuthAdmin: PropTypes.bool,
    isAuth: PropTypes.bool,
-   deleteFilm: PropTypes.func.isRequired
+   deleteFilm: PropTypes.func.isRequired,
+   onHidden: PropTypes.func
 }
 
 export default Main;

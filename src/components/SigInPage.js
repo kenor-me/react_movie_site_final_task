@@ -6,7 +6,7 @@ import './FormPages.css';
 import HomeLink from './HomeLink';
 
 
-const SignIn = ({ onAuthClick, changeAuthAdmin, users }) => {
+const SignIn = ({ onAuthClick, changeAuthAdmin, users, getIndex }) => {
    const [values, setValue] = useState({
       email: '',
       password: ''
@@ -20,7 +20,12 @@ const SignIn = ({ onAuthClick, changeAuthAdmin, users }) => {
    const handleClick = (e) => {
       e.preventDefault();
       onAuthClick(true);
+      
       (values.email === admin.email) && (values.password === admin.password) && changeAuthAdmin(true);
+      users.find(item => {
+         (item.email === values.email) && getIndex(item);
+      });
+
       history.push("/");
    }
 
@@ -87,7 +92,8 @@ const SignIn = ({ onAuthClick, changeAuthAdmin, users }) => {
 SignIn.propTypes = {
    onAuthClick: PropTypes.func,
    changeAuthAdmin: PropTypes.func,
-   users: PropTypes.array
+   users: PropTypes.array,
+   getIndex: PropTypes.func
 }
 
 export default SignIn;

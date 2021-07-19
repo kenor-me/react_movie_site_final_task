@@ -19,6 +19,8 @@ function App() {
   const [isAuthAdmin, setAuthAdmin] = useState(false);
   const [isAuth, setAuth] = useState(false);
   const [filter, setFilter] = useState('popularity.desc');
+  const [name, setName] = useState(1);
+  const [hidden, setHidden] = useState(false);
 
   const totalPages = 10;
   const isValueFilter = (value) => {
@@ -34,16 +36,31 @@ function App() {
 
   useEffect(() => {
     setUsers(list);
-    // console.log(list);
   }, []);
 
 
-  const paginate = (pageNumber) => {setCurrentPage(pageNumber)};
+  useEffect(() => {
+    const data = sessionStorage.getItem('isUser');
+    if (Number(data) !== 1) {
+      setName(JSON.parse(data));
+      setAuth(true);
+    }
+  }, [])
 
+  useEffect(() => {
+    sessionStorage.setItem('isUser', JSON.stringify(name));
+  }, [name])
+
+  useEffect(() => {
+    (name.user === 'admin') && setAuthAdmin(true);
+    (isAuth === false) &&  sessionStorage.setItem('isUser', 1);
+  }, [isAuth, name])
+
+
+  const paginate = (pageNumber) => {setCurrentPage(pageNumber)};
   const prevPage = () => {
     (currentPage > 1)  ? setCurrentPage(prev => prev - 1) : setCurrentPage(1)
   }
-
   const nextPage = () => {
     (currentPage < totalPages) ? setCurrentPage(prev => prev + 1) : setCurrentPage(totalPages);
   }
@@ -89,12 +106,16 @@ function App() {
               onOutClick={setAuth}
               changeAuthAdmin={setAuthAdmin}
               isValueFilter={isValueFilter}
+              name={name.user}
+              hidden={hidden}
+              onHidden={setHidden}
             />
             <Main 
               cards={cards}
               isAuthAdmin={isAuthAdmin}
               isAuth={isAuth}
               deleteFilm={deleteFilm}
+              onHidden={setHidden}
             />
             <Footer 
               paginate={paginate}
@@ -111,6 +132,9 @@ function App() {
               isAuth={isAuth}
               onOutClick={setAuth}
               changeAuthAdmin={setAuthAdmin}
+              name={name.user}
+              hidden={hidden}
+              onHidden={setHidden}
             />
             <Film 
               cards={cards}
@@ -125,6 +149,7 @@ function App() {
             onAuthClick={setAuth}
             changeAuthAdmin={setAuthAdmin}
             users={users}
+            getIndex={setName}
           />
         </Route>
         <Route exact path="/registration">
