@@ -40,10 +40,12 @@ function App() {
 
 
   useEffect(() => {
-    const data = sessionStorage.getItem('isUser');
-    if (Number(data) !== 1) {
-      setName(JSON.parse(data));
-      setAuth(true);
+    if(sessionStorage.getItem('isUser')) {
+      const data = sessionStorage.getItem('isUser');
+      if (data != 1) {
+        setName(JSON.parse(data));
+        setAuth(true);
+      }
     }
   }, [])
 
@@ -55,7 +57,6 @@ function App() {
     (name.user === 'admin') && setAuthAdmin(true);
     (isAuth === false) &&  sessionStorage.setItem('isUser', 1);
   }, [isAuth, name])
-
 
   const paginate = (pageNumber) => {setCurrentPage(pageNumber)};
   const prevPage = () => {

@@ -6,27 +6,6 @@ import './Film.css'
 
 const Film = ({ cards, isAuth, isAuthAdmin, deleteFilm }) => {
    const {id} = useParams();
-
-   // const [idSession, setIdSession] = useState(1);
-   // const [filmsSession, setFilmSession] = useState([]);
-   // console.log(filmsSession);
-   // useEffect(() => {
-   //    const data = sessionStorage.getItem('id');
-   //    const el = sessionStorage.getItem('cards');
-   //    if (Number(data) !== 1) {
-   //       setIdSession(JSON.parse(data));
-   //       setFilmSession(JSON.parse(el));
-   //    }
-   // }, [])
-
-   // useEffect(() => {
-   //    setIdSession(id);
-   //    setFilmSession(cards);
-   //    sessionStorage.setItem('id', JSON.stringify(id));
-   //    sessionStorage.setItem('cards', JSON.stringify(cards));
-   // },[id, cards]);
-   // console.log(typeof Number(idSession), Number(idSession));
-
    const [genres, setGenres] = useState([]);
    const film = cards.find((item) => item.id === Number(id))
    const param = film.vote_count;

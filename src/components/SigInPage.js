@@ -37,12 +37,10 @@ const SignIn = ({ onAuthClick, changeAuthAdmin, users, getIndex }) => {
    }
 
    useEffect(() => {
-      // console.log(values);
-      // при перезагрузке страницы нужно очистить useEffect, разобраться как!!!
-      (values.email === admin.email) && (values.password === admin.password) && setDisabled(false);
-      (values.email === userAuth.email) && (values.password === userAuth.password) && setDisabled(false);
-      // return () => {
-      // }
+      if(values.email) {
+         (values.email === admin.email) && (values.password === admin.password) && setDisabled(false);
+         (values.email === userAuth.email) && (values.password === userAuth.password) && setDisabled(false);
+      }
    }, [admin, values, userAuth])
 
    return (
